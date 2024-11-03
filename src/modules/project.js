@@ -7,4 +7,8 @@ const filterCompletedTaskList = (project) => {
     return project.tasks.filter(task => task.completed);
 };
 
-export default {createProject,filterCompletedTaskList};
+const deleteProject = (projectList, projectIndex) => {
+    projectList.splice(projectIndex, 1);
+};
+
+export default {createProject,deleteProject,filterCompletedTaskList};
