@@ -7,10 +7,10 @@ import { createDiv,
 function createTextInputHolder(labelFor,labelText,inputId,placeholder){
     const holder = createDiv('input-holder');
     const label = createLabel(labelFor,labelText);
-    const input = createInputText(inputId,placeholder);
+    const textInput = createInputText(inputId,placeholder);
 
     holder.appendChild(label);
-    holder.appendChild(input);
+    holder.appendChild(textInput);
 
     return holder;
 }

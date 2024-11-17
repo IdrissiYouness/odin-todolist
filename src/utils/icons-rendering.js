@@ -6,11 +6,11 @@ export function renderCloseModalBtn(node){
     'path'
   );
   iconSvg.classList.add('close-modal-btn');
-  svg.setAttribute("x", "0px");
-  svg.setAttribute("y", "0px");
-  svg.setAttribute("width", "24");
-  svg.setAttribute("height", "24");
-  svg.setAttribute("viewBox", "0 0 26 26");
+  iconSvg.setAttribute("x", "0px");
+  iconSvg.setAttribute("y", "0px");
+  iconSvg.setAttribute("width", "24");
+  iconSvg.setAttribute("height", "24");
+  iconSvg.setAttribute("viewBox", "0 0 26 26");
 
 
   iconPath.setAttribute(

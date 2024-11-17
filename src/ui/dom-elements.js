@@ -13,10 +13,10 @@ export const createLabel = (labelFor,labelText) => {
 
 export const createInputText = (inputId,placeholder) => {
     const input = document.createElement('input');
-    input.setAttribute('type',text);
+    input.setAttribute('type','text');
     input.setAttribute('id',inputId);
     input.setAttribute('placeholder',placeholder);
-    return createInputText;
+    return input;
 }
 
 export const createTextArea = () => {

@@ -32,7 +32,8 @@ const createProjectModal = () => {
     return {
         modal,
         projectNameInput,
-        projectColorInput,
-        createProjectBtn,
+        confirmModalButton,
     };
 };
+
+export {createProjectModal}
