@@ -3,6 +3,8 @@ import { createTextInputHolder,
          createTextAreaHolder,
          createDateInputHolder } from "./input-holders";
 
+import { renderCloseModalBtn } from "../utils/icons-rendering";
+
 
 const createProjectModal = () => {
 
@@ -23,6 +25,7 @@ const createProjectModal = () => {
 
     modal.appendChild(modalBox);
     modalBox.appendChild(form);
+    renderCloseModalBtn(modalBox)
     form.appendChild(projectNameInput);
     form.appendChild(confirmModalButton);
 
