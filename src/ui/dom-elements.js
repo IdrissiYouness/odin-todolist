@@ -22,7 +22,7 @@ export const createInputText = (inputId,placeholder) => {
 export const createTextArea = () => {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('id', 'desc');
-    textarea.setAttribute('placeholder', 'Enter a description...');
+    //textarea.setAttribute('placeholder', 'Enter a description...');
     textarea.setAttribute('rows', '8');
     return textarea;
 };

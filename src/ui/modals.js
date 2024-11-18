@@ -16,24 +16,62 @@ const createProjectModal = () => {
     const form = document.createElement('form');
     form.setAttribute('action', '#');
 
-    const projectNameInput = createTextInputHolder(
-        "title","Project name",
-        "title-input","Enter project name..."
+    const projectNameHolder = createTextInputHolder(
+        "title","Project name","title-project",""
     );
 
     const confirmModalButton = createBtn("confirm-add-btn");
 
     modal.appendChild(modalBox);
     modalBox.appendChild(form);
-    renderCloseModalBtn(modalBox)
-    form.appendChild(projectNameInput);
+    renderCloseModalBtn(modalBox);
+    form.appendChild(projectNameHolder);
     form.appendChild(confirmModalButton);
 
     return {
         modal,
-        projectNameInput,
+        projectNameHolder,
         confirmModalButton,
     };
+
 };
 
-export {createProjectModal}
+
+const createTaskModal = () =>{
+
+    const modal = createDiv("modal-container");
+    modal.setAttribute("id","add-task-modal");
+
+    const modalBox = createDiv("modal-box");
+
+    const form = document.createElement("form");
+    form.setAttribute("action","#");
+
+    const titleTaskInputHolder = createTextInputHolder(
+        "title","Title","title-task",""
+    );
+    const descInputHolder = createTextAreaHolder();
+    const dueDateInputHolder = createDateInputHolder(
+        "due-date","Due date","due-date-input"
+    );
+    const confirmModalButton = createBtn("confirm-add-button");
+
+    modal.appendChild(modalBox);
+    modalBox.appendChild(form);
+    renderCloseModalBtn(modalBox);
+    form.appendChild(titleTaskInputHolder);
+    form.appendChild(descInputHolder);
+    form.appendChild(dueDateInputHolder);
+    form.appendChild(confirmModalButton);
+
+    return{
+        modal,
+        titleTaskInputHolder,
+        descInputHolder,
+        dueDateInputHolder,
+        confirmModalButton,
+    };
+}
+
+
+export {createProjectModal,createTaskModal}

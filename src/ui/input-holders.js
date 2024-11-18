@@ -16,7 +16,7 @@ function createTextInputHolder(labelFor,labelText,inputId,placeholder){
 }
 
 function createTextAreaHolder(){
-    const holder = createTextArea('input-holder');
+    const holder = createDiv('input-holder');
     const label = createLabel('desc', 'Description');
     const textarea = createTextArea();
 
@@ -35,7 +35,7 @@ function createDateInputHolder(labelFor, labelText, inputId){
     holder.appendChild(label);
     holder.appendChild(date);
 
-    return div;
+    return holder;
   }
 
 
