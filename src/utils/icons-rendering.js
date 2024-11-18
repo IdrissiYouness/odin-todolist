@@ -20,6 +20,7 @@ export function renderCloseModalBtn(node){
 
   iconSvg.appendChild(iconPath);
 
-  return node.appendChild(iconSvg);
+  node.appendChild(iconSvg);
 
+  return iconSvg;
 }
