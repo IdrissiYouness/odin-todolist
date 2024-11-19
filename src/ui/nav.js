@@ -34,6 +34,8 @@ function createProjectHolder(){
 //custom div btn creation
 function createAddNewProjectBtn(){
   const addNewProjectBtn = createDiv("btn");
+  addNewProjectBtn.classList.add('open-modal-btn');
+  addNewProjectBtn.setAttribute('data-modal-id','add-project-modal');
   addNewProjectBtn.textContent = "Create New Project";
   return addNewProjectBtn;
 }

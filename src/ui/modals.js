@@ -20,7 +20,11 @@ const createProjectModal = () => {
         "title","Project name","title-project",""
     );
 
+    const projectNameInput = projectNameHolder.querySelector('input');
+
     const confirmModalButton = createBtn("confirm-add-btn");
+    confirmModalButton.classList.add("btn");
+    confirmModalButton.textContent = "Add new Project";
 
     modal.appendChild(modalBox);
     modalBox.appendChild(form);
@@ -30,7 +34,7 @@ const createProjectModal = () => {
 
     return {
         modal,
-        projectNameHolder,
+        projectNameInput,
         confirmModalButton,
     };
 
@@ -50,11 +54,22 @@ const createTaskModal = () =>{
     const titleTaskInputHolder = createTextInputHolder(
         "title","Title","title-task",""
     );
+
+    const titleTaskInput = titleTaskInputHolder.querySelector('input');
+
     const descInputHolder = createTextAreaHolder();
+
+    const descInput = descInputHolder.querySelector('textarea');
+
     const dueDateInputHolder = createDateInputHolder(
         "due-date","Due date","due-date-input"
     );
+
+    const dueDateInput = dueDateInputHolder.querySelector('input');
+
     const confirmModalButton = createBtn("confirm-add-button");
+    confirmModalButton.classList.add("btn");
+    confirmModalButton.textContent = "Add new Task";
 
     modal.appendChild(modalBox);
     modalBox.appendChild(form);
@@ -66,9 +81,9 @@ const createTaskModal = () =>{
 
     return{
         modal,
-        titleTaskInputHolder,
-        descInputHolder,
-        dueDateInputHolder,
+        titleTaskInput,
+        descInput,
+        dueDateInput,
         confirmModalButton,
     };
 }
