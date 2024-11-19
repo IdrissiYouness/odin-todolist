@@ -28,7 +28,7 @@ function createTextAreaHolder(){
 
 
 function createDateInputHolder(labelFor, labelText, inputId){
-    const holder = createDiv('div-input');
+    const holder = createDiv('input-holder');
     const label = createLabel(labelFor, labelText);
     const date = createInputDate(inputId);
 

@@ -1,0 +1,283 @@
+@import url("./style-reset.css");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+:root{
+    --bg-color:#F4F4F4;
+}
+
+*{
+    font-family: "Nunito", serif;
+}
+body{
+    background-color:var(--bg-color);
+}
+.main-container{
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+
+}
+
+nav{
+    background-color: white;
+    margin: 10px;
+    padding: 25px 15px 25px 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2{
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding-bottom:20px;
+}
+
+.projects-container{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+.default-project{
+    padding:8px 0 8px 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 8px;
+}
+
+.default-project:hover{
+    background-color:var(--bg-color);
+    cursor: pointer;
+}
+
+
+.tab.default-project.active{
+    background-color: var(--bg-color);
+}
+
+.btn{
+    height: 40px;
+    border:0;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: left;
+    background-color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+    user-select: none;
+    font-weight: 500;
+}
+
+.btn:hover{
+    background-color: #dbdbdb;
+}
+
+main{
+    margin: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-heading>h1{
+   font-size: 1.3rem;
+   font-weight: bolder;
+}
+.today-date{
+    color:#c3c3c3;
+    font-size:1rem;
+}
+
+.task-list-container{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-item-container{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.task-giant-item{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 10px;
+}
+
+p{
+    display: inline;
+}
+
+.task-title{
+    font-weight: 600;
+}
+
+input[type="checkbox"]{
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: black;
+    cursor: pointer;
+}
+
+.check-box{
+    display: flex;
+    align-items: center;
+}
+
+.task-holder{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+/*
+.check-box{
+  width: 1.5rem;
+  height: 1.5rem;
+  border: solid #939393;
+  border-radius: 9px;
+  cursor: pointer;
+}
+*/
+.add-task-btn{
+    width: 35%;
+    background-color: black;
+    color: white;
+    box-shadow: 0px 4px 8px #dbdbdb;
+}
+
+.add-task-btn:hover{
+  background-color:white;
+  color: black;
+
+}
+
+.task-holder{
+    flex-grow: 1;
+}
+
+.priority-tag{
+    background-color: #F4F4F4;
+    padding: 0 8px 0 8px;
+    border-radius: 8px;
+}
+
+.low{
+    color: #4CAF50;
+}
+
+
+.medium{
+    color: #FF8C00;
+}
+
+.high{
+    color: #FF6347;
+}
+
+
+
+.desc-container {
+    max-width: 75%;
+    overflow: hidden;
+    padding-left: 30px;
+    max-height: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+
+.task-giant-item.expanded .desc-container {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.modal-container{
+    width: fit-content;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    display: none;
+
+}
+
+.modal-box{
+    position: relative;
+
+}
+
+.close-modal-btn{
+    position: absolute;
+    right:10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+
+
+.modal-box>form{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    gap: 20px;
+    padding: 25px;
+    border-radius: 8px;
+    border: solid 3px black;
+}
+
+
+.input-holder{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+
+.input-holder>input,textarea{
+    display: block;
+    outline: solid 3px rgb(0, 0, 0);
+    border:none;
+    padding: 5px;
+}
+
+label{
+    font-weight: 500;
+}
+input[type="text"]{
+    width: 100%;
+}
+
+.btn.confirm-add-btn{
+    justify-content: center;
+    padding:0;
+}
+
+.confirm-add-btn:hover{
+    color: white;
+    background-color: black;
+}
+
+.show{
+    display: flex;
+    opacity: 1;
+}
