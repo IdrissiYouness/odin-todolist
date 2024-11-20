@@ -10,5 +10,12 @@ export function attachEventListeners(){
             const modalId = target.getAttribute('data-modal-id');
             handleOpenModal(modalId)
         }
+
+        if (target.classList.contains('close-modal-btn')) {
+            const modal = target.closest('.modal-container');
+            handleCloseModal(modal);
+        }
+
+
     })
 }
