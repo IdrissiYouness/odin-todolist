@@ -24,3 +24,41 @@ export function renderCloseModalBtn(node){
 
   return iconSvg;
 }
+
+export function renderDeleteTaskBtn(node) {
+
+  const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+
+  iconSvg.classList.add('delete-task-btn');
+  iconSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  iconSvg.setAttribute("x", "0px");
+  iconSvg.setAttribute("y", "0px");
+  iconSvg.setAttribute("width", "24");
+  iconSvg.setAttribute("height", "24");
+  iconSvg.setAttribute("viewBox", "0 0 26 26");
+
+
+  const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path1.setAttribute("fill", "#b39ddb");
+  path1.setAttribute("d", "M30.6,44H17.4c-2,0-3.7-1.4-4-3.4L9,11h30l-4.5,29.6C34.2,42.6,32.5,44,30.6,44z");
+  iconSvg.appendChild(path1);
+
+
+  const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path2.setAttribute("fill", "#9575cd");
+  path2.setAttribute("d", "M28 6L20 6 14 12 34 12z");
+  iconSvg.appendChild(path2);
+
+
+  const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path3.setAttribute("fill", "#7e57c2");
+  path3.setAttribute("d", "M10,8h28c1.1,0,2,0.9,2,2v2H8v-2C8,8.9,8.9,8,10,8z");
+  iconSvg.appendChild(path3);
+
+
+  node.appendChild(iconSvg);
+
+  return iconSvg;
+}
+
