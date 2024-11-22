@@ -55,3 +55,12 @@ export const createPara = (className, text) => {
     p.textContent = text;
     return p;
   }
+
+
+export const createCheckBox = (name) =>{
+    const c = document.createElement('input');
+    c.setAttribute('type','checkbox');
+    c.setAttribute('name','done');
+
+    return c;
+}
