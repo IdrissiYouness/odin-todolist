@@ -36,29 +36,27 @@ export function renderDeleteTaskBtn(node) {
   iconSvg.setAttribute("y", "0px");
   iconSvg.setAttribute("width", "24");
   iconSvg.setAttribute("height", "24");
-  iconSvg.setAttribute("viewBox", "0 0 26 26");
+  iconSvg.setAttribute("viewBox", "0 0 24 24");
 
 
   const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path1.setAttribute("fill", "#b39ddb");
-  path1.setAttribute("d", "M30.6,44H17.4c-2,0-3.7-1.4-4-3.4L9,11h30l-4.5,29.6C34.2,42.6,32.5,44,30.6,44z");
+  path1.setAttribute("d", "M15.352,22H8.648c-1.513,0-2.789-1.127-2.977-2.628L4,6h16l-1.672,13.372	C18.141,20.873,16.865,22,15.352,22z");
+  path1.setAttribute("opacity", ".35");
   iconSvg.appendChild(path1);
 
 
   const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path2.setAttribute("fill", "#9575cd");
-  path2.setAttribute("d", "M28 6L20 6 14 12 34 12z");
+  path2.setAttribute("d", "M16,4H8V3c0-0.552,0.448-1,1-1h6c0.552,0,1,0.448,1,1V4z");
   iconSvg.appendChild(path2);
 
 
   const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path3.setAttribute("fill", "#7e57c2");
-  path3.setAttribute("d", "M10,8h28c1.1,0,2,0.9,2,2v2H8v-2C8,8.9,8.9,8,10,8z");
+  path3.setAttribute("d", "M19,3C18.399,3,5.601,3,5,3C3.895,3,3,3.895,3,5c0,1.105,0.895,2,2,2c0.601,0,13.399,0,14,0c1.105,0,2-0.895,2-2	C21,3.895,20.105,3,19,3z");
   iconSvg.appendChild(path3);
 
 
   node.appendChild(iconSvg);
 
   return iconSvg;
-}
 
+}
