@@ -40,6 +40,14 @@ function createAddNewProjectBtn(){
   return addNewProjectBtn;
 }
 
+export function createDefaultProject(newProjectId, newProjectName){
+    const defaultProject = createDiv('tab');
+    defaultProject.dataset.projectId = newProjectId;
+    defaultProject.classList.add('project','active');
+    defaultProject.textContent = newProjectName;
+    return defaultProject;
+}
+
 
 export function addProjectToNav(project){
     const div = document.querySelector('.projects-container');
@@ -50,5 +58,14 @@ export function addProjectToNav(project){
 export function removeProjectFromNav(project) {
     const div = document.querySelector('.projects-container');
     div.removeChild(project);
+}
+
+export function renderProjectsToNav(projectCollection) {
+    const container = document.querySelector('.projects-container');
+    container.innerHTML = "";
+    projectCollection.mapProjectNameAndId().forEach(({ id, name }) => {
+        const projectTab = createDefaultProject(id, name);
+        addProjectToNav(projectTab);
+    });
 }
 

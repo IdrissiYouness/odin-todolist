@@ -64,3 +64,19 @@ export const createCheckBox = (name) =>{
 
     return c;
 }
+
+export const createPriorityListSelect=(newClass)=>{
+
+    const select = document.createElement("select");
+    select.classList.add(newClass);
+    const priorities = ['Low','High','Medium'];
+
+    priorities.forEach((p)=>{
+        const op = document.createElement('option');
+        op.setAttribute('value',p);
+        op.textContent = p;
+        select.appendChild(op);
+    })
+
+    return select;
+}

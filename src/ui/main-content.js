@@ -30,6 +30,7 @@ function createTaskListContainer(){
 function createAddNewTaskBtn(){
     const addNewTaskBtn = createDiv("btn");
     addNewTaskBtn.classList.add('add-task-btn');
+    addNewTaskBtn.classList.add('open-modal-btn');
     addNewTaskBtn.setAttribute('data-modal-id','add-task-modal');
     addNewTaskBtn.textContent = "Create new task";
     return addNewTaskBtn;
@@ -55,6 +56,11 @@ export function createTaskItem(id,title,desc,dueDate,priority,isDone){
     taskHolder.appendChild(taskTitle);
     taskHolder.appendChild(priorityTag);
 
+    const dueDateHolder = createPara("due-date");
+    dueDateHolder.textContent = `${dueDate}`;
+
+
+
     const {
         actionsDiv:actions
     } = createActionsDom();
@@ -71,8 +77,20 @@ export function createTaskItem(id,title,desc,dueDate,priority,isDone){
 
     taskItemContainer.appendChild(checkboxHolder);
     taskItemContainer.appendChild(taskHolder);
+    taskItemContainer.appendChild(dueDateHolder);
     taskItemContainer.appendChild(actions);
 
     return taskGiantItem;
 }
+
+export function addTaskToDom(task){
+    const div = document.querySelector('.task-list-container');
+    div.appendChild(task);
+}
+
+export function  removeTaskFromDom(task){
+    const div = document.querySelector('.task-list-container');
+    div.removeChild(task);
+}
+
 

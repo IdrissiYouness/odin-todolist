@@ -1,4 +1,4 @@
-import { createDiv, createBtn} from "./dom-elements";
+import { createDiv, createBtn, createPriorityListSelect} from "./dom-elements";
 import { createTextInputHolder,
          createTextAreaHolder,
          createDateInputHolder } from "./input-holders";
@@ -67,7 +67,7 @@ const createTaskModal = () =>{
 
     const dueDateInput = dueDateInputHolder.querySelector('input');
 
-    const confirmModalButton = createBtn("confirm-add-button");
+    const confirmModalButton = createBtn("confirm-add-btn");
     confirmModalButton.classList.add("btn");
     confirmModalButton.textContent = "Add new Task";
 
@@ -76,6 +76,7 @@ const createTaskModal = () =>{
     renderCloseModalBtn(modalBox);
     form.appendChild(titleTaskInputHolder);
     form.appendChild(descInputHolder);
+    form.appendChild(createPriorityListSelect("priority-list"));
     form.appendChild(dueDateInputHolder);
     form.appendChild(confirmModalButton);
 
