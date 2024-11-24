@@ -1,32 +1,31 @@
-const createTask = (title,description,dueDate,priority) => {
-    return {title, description,dueDate,priority,completed:false};
-};
+export default function task(id, title, description, priority, dueDate){
+    const getId = ()=> id;
+    const getTitle = ()=> title;
+    const getDescription = ()=> description;
+    const getDueDate = ()=> dueDate;
+    let isCompleted = false;
+    const getStatus = () => isCompleted;
+    const getPriority = () => priority;
+    const setTitle = newTitle => title = newTitle;
+    const setDescription = newDesc => description = newDesc;
+    const setDueDate = newDueDate => dueDate = newDueDate;
+    const setStatus = newStatus => isCompleted = newStatus;
 
-const editTask = (task,newTitle,newDueDate,newPriority) =>{
-    task.title = newTitle;
-    task.dueDate = newDueDate;
-    task.priority = newPriority;
-    return task;
-};
+    const printDetails = ()=> {
+      console.log(`ID: ${getId()}\nTitle: ${getTitle()}\nDescription: ${getDescription()}\nPriority: ${getPriority()}\nDue Date: ${getDueDate()}`);
+    }
 
-const deleteTask = (taskList,taskIndex) => {
-    taskList.splice(taskIndex,1);
-};
-
-
-function getTaskPriority(priority){
-    if(priority==='High') return 'high-priority';
-    if(priority==='Medium') return 'medium-priority'
-    return 'low-priority';
-}
-
-const toggleCompletedTask = (task) =>{
-    task.completed = !task.completed;
-}
-
-const isOverDue = (dueDate) => {
-    const today = new Date();
-    return new Date(dueDate) < today;
-}
-
-export {createTask,editTask,deleteTask,getTaskPriority,toggleCompletedTask,isOverDue};
+    return {
+      getId,
+      getTitle,
+      getDescription,
+      getPriority,
+      getDueDate,
+      setTitle,
+      setDescription,
+      setDueDate,
+      getStatus,
+      setStatus,
+      printDetails
+    }
+  }
