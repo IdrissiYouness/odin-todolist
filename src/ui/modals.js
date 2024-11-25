@@ -24,6 +24,7 @@ const createProjectModal = () => {
 
     const confirmModalButton = createBtn("confirm-add-btn");
     confirmModalButton.classList.add("btn");
+    confirmModalButton.setAttribute('id','confirm-add-project-btn');
     confirmModalButton.textContent = "Add new Project";
 
     modal.appendChild(modalBox);
@@ -65,10 +66,13 @@ const createTaskModal = () =>{
         "due-date","Due date","due-date-input"
     );
 
+    const priorityListSelect = createPriorityListSelect("priority-list");
+
     const dueDateInput = dueDateInputHolder.querySelector('input');
 
     const confirmModalButton = createBtn("confirm-add-btn");
     confirmModalButton.classList.add("btn");
+    confirmModalButton.setAttribute('id','confirm-add-task-btn');
     confirmModalButton.textContent = "Add new Task";
 
     modal.appendChild(modalBox);
@@ -76,7 +80,7 @@ const createTaskModal = () =>{
     renderCloseModalBtn(modalBox);
     form.appendChild(titleTaskInputHolder);
     form.appendChild(descInputHolder);
-    form.appendChild(createPriorityListSelect("priority-list"));
+    form.appendChild(priorityListSelect);
     form.appendChild(dueDateInputHolder);
     form.appendChild(confirmModalButton);
 
@@ -85,7 +89,8 @@ const createTaskModal = () =>{
         titleTaskInput,
         descInput,
         dueDateInput,
-        confirmModalButton,
+        priorityListSelect,
+        confirmModalButton
     };
 }
 

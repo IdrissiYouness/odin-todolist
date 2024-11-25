@@ -20,18 +20,10 @@ function createProjectHeading(){
 
 function createProjectListContainer(){
     const projectList = createDiv("projects-container");
-    projectList.appendChild(createProjectHolder());
     return projectList;
 }
 
 
-
-function createProjectHolder(){
-    const projectHolder = createDiv("tab");
-    return projectHolder;
-}
-
-//custom div btn creation
 function createAddNewProjectBtn(){
   const addNewProjectBtn = createDiv("btn");
   addNewProjectBtn.classList.add('open-modal-btn');
@@ -40,13 +32,26 @@ function createAddNewProjectBtn(){
   return addNewProjectBtn;
 }
 
+
 export function createDefaultProject(newProjectId, newProjectName){
     const defaultProject = createDiv('tab');
     defaultProject.dataset.projectId = newProjectId;
-    defaultProject.classList.add('project','active');
+    defaultProject.classList.add('project');
     defaultProject.textContent = newProjectName;
     return defaultProject;
 }
+
+
+export function createAndAddProjectToNav(project) {
+    const navContainer = document.querySelector('.projects-container');
+    const projectTab = document.createElement('div');
+    projectTab.classList.add('tab','project');
+    projectTab.textContent = project.getName();
+    projectTab.setAttribute('data-project-id', project.getId());
+    navContainer.appendChild(projectTab);
+}
+
+
 
 
 export function addProjectToNav(project){
@@ -69,3 +74,11 @@ export function renderProjectsToNav(projectCollection) {
     });
 }
 
+export function getActiveProjectId() {
+    const activeTab = document.querySelector('.tab.active');
+    return activeTab ? activeTab.getAttribute('data-project-id') : null;
+}
+
+export function getProjectById(projectCollection, projectId) {
+    return projectCollection.getProject(projectCollection.findProjectIndex(projectId));
+}

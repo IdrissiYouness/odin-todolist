@@ -4,6 +4,7 @@ import { createActionsDom } from "./task-actions";
 
 
 
+
 export default function createMainContent(){
 
     const main = document.createElement('main');
@@ -37,27 +38,28 @@ function createAddNewTaskBtn(){
 }
 
 
-export function createTaskItem(id,title,desc,dueDate,priority,isDone){
+export function createTaskItem(task){
 
     const taskGiantItem = createDiv("task-giant-item");
+    taskGiantItem.dataset.taskId = task.id;
     const taskItemContainer = createDiv("task-item-container");
 
     const checkboxHolder = createDiv("check-box");
     checkboxHolder.appendChild(createCheckBox("done"));
 
     const taskTitle = createPara("task-title");
-    taskTitle.textContent = `${title}`;
+    taskTitle.textContent = task.title;
 
     const priorityTag = document.createElement('span');
     priorityTag.classList.add('priority-tag');
-    priorityTag.textContent = `${priority}`;
+    priorityTag.textContent = task.priority;
 
     const taskHolder = createDiv("task-holder");
     taskHolder.appendChild(taskTitle);
     taskHolder.appendChild(priorityTag);
 
     const dueDateHolder = createPara("due-date");
-    dueDateHolder.textContent = `${dueDate}`;
+    dueDateHolder.textContent = task.dueDate;
 
 
 
@@ -68,7 +70,7 @@ export function createTaskItem(id,title,desc,dueDate,priority,isDone){
 
     const descriptionHolder = createDiv("desc-container");
     const taskDescription = createPara("task-desc");
-    taskDescription.textContent = `${desc}`;
+    taskDescription.textContent = task.description;
     descriptionHolder.appendChild(taskDescription);
 
 
@@ -83,6 +85,22 @@ export function createTaskItem(id,title,desc,dueDate,priority,isDone){
     return taskGiantItem;
 }
 
+
+
+export function renderTasks(project) {
+    const taskListContainer = document.querySelector(".task-list-container");
+    taskListContainer.innerHTML = "";
+
+    project.getTasks().forEach(task => {
+        const taskElement = createTaskItem(
+            task
+        );
+        addTaskToDom(taskElement);
+    });
+}
+
+
+
 export function addTaskToDom(task){
     const div = document.querySelector('.task-list-container');
     div.appendChild(task);
@@ -92,5 +110,3 @@ export function  removeTaskFromDom(task){
     const div = document.querySelector('.task-list-container');
     div.removeChild(task);
 }
-
-
