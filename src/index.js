@@ -1,42 +1,109 @@
-import { createTask, editTask, deleteTask, getTaskPriority, toggleCompletedTask, isOverDue } from './modules/task.js';
-import ProjectModule from './modules/project.js';
+import './styles/style.css';
+import { createDiv } from './ui/dom-elements';
+import createNav, {renderProjectsToNav,getActiveProjectId} from "./ui/nav";
+import createMainContent ,{renderTasks} from './ui/main-content';
+import { createProjectModal,createTaskModal} from "./ui/modals";
+import { attachEventListeners } from './events/event-listeners';
+import { importDataFromStorage,exportDataToStorage } from './utils/local-storage.js';
 
-const { createProject, filterCompletedTaskList } = ProjectModule;
-
-const project = createProject("Main Project");
-const project2 = createProject("Main Project 2")
-
-const projects = [
-    project,project2
-]
-
-console.log("a project created:",project);
-
-const task1 = createTask("Complete assignment", "Finish the math assignment", "2024-11-02", "High");
-const task2 = createTask("Grocery shopping", "Buy groceries for the week", "2024-11-05", "Medium");
+import task from './modules/task.js';
+import project from './modules/project.js';
+import projectCollection from './modules/project-collection.js';
 
 
-const task3 = createTask("Home chores","Laundry","2024-11-06");
+const mainContent = createDiv("main-container");
+const navigation = createNav();
+const main = createMainContent();
 
-editTask(task1, "Complete assignment - revised", "2024-11-03", "Medium");
-console.log("Edited task 1:", task1);
+const { modal: projectModal,projectNameInput,confirmModalButton:confirmProjectBtn } = createProjectModal();
+const { modal: taskModal,titleTaskInput,descInput,priorityListSelect,dueDateInput,confirmModalButton:confirmTaskBtn } = createTaskModal();
 
-project.tasks.push(task1, task2);
-console.log("Tasks added to project:", project.tasks);
+main.appendChild(projectModal);
+main.appendChild(taskModal);
 
-project2.tasks.push(task3);
-
-toggleCompletedTask(task2);
-console.log("Toggled completion of task 2:", task2);
-
-
-const overdueStatus = isOverDue(task2.dueDate);
-console.log(`Is task 2 overdue? ${overdueStatus}`);
+mainContent.appendChild(navigation);
+mainContent.appendChild(main);
+document.body.appendChild(mainContent);
 
 
-const completedTasks = filterCompletedTaskList(project);
-console.log("Completed tasks in project:", completedTasks);
+const myProjects = projectCollection();
+importDataFromStorage(myProjects);
+
+if (myProjects.findProjectName("Default") === -1) {
+     const defaultProj = project('default', 'Default');
+     myProjects.addProject(defaultProj);
+     exportDataToStorage(myProjects);
+ }
+
+ renderProjectsToNav(myProjects);
+ renderTasks(myProjects.getProject(0));
 
 
-console.log(projects);
+document.addEventListener('DOMContentLoaded', () => {
+     attachEventListeners();
+ });
+
+
+ //using Date to generate a unique Id
+
+
+confirmProjectBtn.addEventListener('click',(event)=>{
+     event.preventDefault();
+     const newProj = project(Date.now().toString(), projectNameInput.value);
+     myProjects.addProject(newProj);
+     exportDataToStorage(myProjects);
+     renderProjectsToNav(myProjects);
+     /*
+     createAndAddProjectToNav(newProj);
+     */
+})
+
+
+confirmTaskBtn.addEventListener('click',(event)=>{
+     event.preventDefault();
+
+     const newTask = task(Date.now().toString(),
+     titleTaskInput.value,
+     descInput.value,
+     priorityListSelect.value,
+     dueDateInput.value);
+
+     const activeProjectId = getActiveProjectId();
+
+     const activeProject = myProjects.getProject(
+          myProjects.findProjectIndex(activeProjectId)
+      );
+
+     activeProject.addATask(newTask);
+     exportDataToStorage(myProjects);
+
+     // using render tasks temporary to fix  undefined task info bug
+     renderTasks(activeProject);
+
+     /*
+     const taskItem = createTaskItem(newTask);
+     addTaskToDom(taskItem);
+     */
+
+})
+
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+
+    tab.classList.add('active');
+
+    const activeProjectId = tab.dataset.projectId;
+    const activeProject = myProjects.getProject(
+           myProjects.findProjectIndex(activeProjectId)
+    );
+    renderTasks(activeProject);
+  });
+});
+
+
+
 
