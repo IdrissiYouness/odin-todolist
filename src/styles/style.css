@@ -41,20 +41,20 @@ h2{
     gap:8px;
 }
 
-.default-project{
+.project{
     padding:8px 0 8px 8px;
     font-size: 1rem;
     font-weight: 400;
     border-radius: 8px;
 }
 
-.default-project:hover{
+.project:hover{
     background-color:var(--bg-color);
     cursor: pointer;
 }
 
 
-.tab.default-project.active{
+.tab.active{
     background-color: var(--bg-color);
 }
 
@@ -280,4 +280,15 @@ input[type="text"]{
 .show{
     display: flex;
     opacity: 1;
+}
+
+.priority-list{
+    outline: solid 3px rgb(0, 0, 0);
+    border:none;
+    padding: 8px;
+    background-color: white;
+}
+
+option{
+    font-family: sans-serif;
 }
