@@ -13,8 +13,7 @@ const createProjectModal = () => {
 
     const modalBox = createDiv("modal-box");
 
-    const form = document.createElement('form');
-    form.setAttribute('action', '#');
+    const form = createDiv('form-div');
 
     const projectNameHolder = createTextInputHolder(
         "title","Project name","title-project",""
@@ -22,21 +21,21 @@ const createProjectModal = () => {
 
     const projectNameInput = projectNameHolder.querySelector('input');
 
-    const confirmModalButton = createBtn("confirm-add-btn");
-    confirmModalButton.classList.add("btn");
-    confirmModalButton.setAttribute('id','confirm-add-project-btn');
-    confirmModalButton.textContent = "Add new Project";
+    const confirmProjectButton = createBtn("confirm-add-btn");
+    confirmProjectButton.classList.add("btn");
+    confirmProjectButton.setAttribute('id','confirm-add-project-btn');
+    confirmProjectButton.textContent = "Add new Project";
 
     modal.appendChild(modalBox);
     modalBox.appendChild(form);
     renderCloseModalBtn(modalBox);
     form.appendChild(projectNameHolder);
-    form.appendChild(confirmModalButton);
+    form.appendChild(confirmProjectButton);
 
     return {
         modal,
         projectNameInput,
-        confirmModalButton,
+        confirmProjectButton,
     };
 
 };
@@ -49,8 +48,7 @@ const createTaskModal = () =>{
 
     const modalBox = createDiv("modal-box");
 
-    const form = document.createElement("form");
-    form.setAttribute("action","#");
+    const form = createDiv("form-div");
 
     const titleTaskInputHolder = createTextInputHolder(
         "title","Title","title-task",""
@@ -70,10 +68,10 @@ const createTaskModal = () =>{
 
     const dueDateInput = dueDateInputHolder.querySelector('input');
 
-    const confirmModalButton = createBtn("confirm-add-btn");
-    confirmModalButton.classList.add("btn");
-    confirmModalButton.setAttribute('id','confirm-add-task-btn');
-    confirmModalButton.textContent = "Add new Task";
+    const confirmTaskButton = createBtn("confirm-add-btn");
+    confirmTaskButton.classList.add("btn");
+    confirmTaskButton.setAttribute('id','confirm-add-task-btn');
+    confirmTaskButton.textContent = "Add new Task";
 
     modal.appendChild(modalBox);
     modalBox.appendChild(form);
@@ -82,7 +80,7 @@ const createTaskModal = () =>{
     form.appendChild(descInputHolder);
     form.appendChild(priorityListSelect);
     form.appendChild(dueDateInputHolder);
-    form.appendChild(confirmModalButton);
+    form.appendChild(confirmTaskButton);
 
     return{
         modal,
@@ -90,7 +88,7 @@ const createTaskModal = () =>{
         descInput,
         dueDateInput,
         priorityListSelect,
-        confirmModalButton
+        confirmTaskButton
     };
 }
 

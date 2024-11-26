@@ -232,7 +232,7 @@ input[type="checkbox"]{
 
 
 
-.modal-box>form{
+.modal-box>.form-div{
     background-color: white;
     display: flex;
     flex-direction: column;

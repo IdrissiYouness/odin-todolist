@@ -1,6 +1,6 @@
 import { createDiv, createHeading } from "./dom-elements";
 import project from "../modules/project";
-
+import { renderTasks } from "./main-content";
 export default function createNav(){
     const nav = document.createElement('nav');
 
@@ -42,15 +42,13 @@ export function createDefaultProject(newProjectId, newProjectName){
 }
 
 
-export function createAndAddProjectToNav(project) {
-    const navContainer = document.querySelector('.projects-container');
-    const projectTab = document.createElement('div');
-    projectTab.classList.add('tab','project');
-    projectTab.textContent = project.getName();
-    projectTab.setAttribute('data-project-id', project.getId());
-    navContainer.appendChild(projectTab);
+export function createProjectTab(newProjectId,newProjectName) {
+    const projectTab = createDiv('tab');
+    projectTab.classList.add('project');
+    projectTab.dataset.projectId = newProjectId;
+    projectTab.textContent = newProjectName;
+    return projectTab;
 }
-
 
 
 
@@ -65,18 +63,11 @@ export function removeProjectFromNav(project) {
     div.removeChild(project);
 }
 
-export function renderProjectsToNav(projectCollection) {
-    const container = document.querySelector('.projects-container');
-    container.innerHTML = "";
-    projectCollection.mapProjectNameAndId().forEach(({ id, name }) => {
-        const projectTab = createDefaultProject(id, name);
-        addProjectToNav(projectTab);
-    });
-}
+
 
 export function getActiveProjectId() {
     const activeTab = document.querySelector('.tab.active');
-    return activeTab ? activeTab.getAttribute('data-project-id') : null;
+    return activeTab ? activeTab.dataset.projectId : null;
 }
 
 export function getProjectById(projectCollection, projectId) {

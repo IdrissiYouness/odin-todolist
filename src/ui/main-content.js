@@ -1,3 +1,4 @@
+
 import { createDiv, createPara, createCheckBox } from "./dom-elements";
 import { createMainGreeting } from "./greeting";
 import { createActionsDom } from "./task-actions";
@@ -38,28 +39,28 @@ function createAddNewTaskBtn(){
 }
 
 
-export function createTaskItem(task){
+export function createTaskItem(newTaskId,newTitle,newDescription,newPriority,newDueDate){
 
     const taskGiantItem = createDiv("task-giant-item");
-    taskGiantItem.dataset.taskId = task.id;
+    taskGiantItem.dataset.taskId = newTaskId;
     const taskItemContainer = createDiv("task-item-container");
 
     const checkboxHolder = createDiv("check-box");
     checkboxHolder.appendChild(createCheckBox("done"));
 
     const taskTitle = createPara("task-title");
-    taskTitle.textContent = task.title;
+    taskTitle.textContent = newTitle;
 
     const priorityTag = document.createElement('span');
     priorityTag.classList.add('priority-tag');
-    priorityTag.textContent = task.priority;
+    priorityTag.textContent = newPriority;
 
     const taskHolder = createDiv("task-holder");
     taskHolder.appendChild(taskTitle);
     taskHolder.appendChild(priorityTag);
 
     const dueDateHolder = createPara("due-date");
-    dueDateHolder.textContent = task.dueDate;
+    dueDateHolder.textContent = newDueDate;
 
 
 
@@ -70,7 +71,7 @@ export function createTaskItem(task){
 
     const descriptionHolder = createDiv("desc-container");
     const taskDescription = createPara("task-desc");
-    taskDescription.textContent = task.description;
+    taskDescription.textContent = newDescription;
     descriptionHolder.appendChild(taskDescription);
 
 
@@ -84,22 +85,6 @@ export function createTaskItem(task){
 
     return taskGiantItem;
 }
-
-
-
-export function renderTasks(project) {
-    const taskListContainer = document.querySelector(".task-list-container");
-    taskListContainer.innerHTML = "";
-
-    project.getTasks().forEach(task => {
-        const taskElement = createTaskItem(
-            task
-        );
-        addTaskToDom(taskElement);
-    });
-}
-
-
 
 export function addTaskToDom(task){
     const div = document.querySelector('.task-list-container');
