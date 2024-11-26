@@ -36,7 +36,7 @@ function createAddNewProjectBtn(){
 export function createDefaultProject(newProjectId, newProjectName){
     const defaultProject = createDiv('tab');
     defaultProject.dataset.projectId = newProjectId;
-    defaultProject.classList.add('project');
+    defaultProject.classList.add('project','active');
     defaultProject.textContent = newProjectName;
     return defaultProject;
 }
