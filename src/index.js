@@ -58,41 +58,6 @@ function initializeStorage() {
 }
 
 
-/*
- confirmProjectButton.addEventListener('click',()=>
-     {
-     const projectName = projectNameInput.value;
-
-     const newId = Date.now().toString();
-
-     const newProj = project(newId,projectName);
-
-     myProjects.addProject(newProj);
-
-     const newProjectTab = createProjectTab(newId,projectName);
-
-     addProjectToNav(newProjectTab);
-
-     newProjectTab.addEventListener('click',(event)=>{
-          const previouslyActive = document.querySelector('.active');
-          if (previouslyActive) {
-               previouslyActive.classList.remove('active');
-          }
-          const clickedTab = event.currentTarget;
-
-          clickedTab.classList.add('active');
-
-          const newActiveProjectId = clickedTab.dataset.projectId;
-
-          renderTasks(newActiveProjectId);
-     });
-
-     exportDataToStorage(myProjects);
-
-     return true;
-});
-*/
-
 confirmProjectButton.addEventListener('click', (event) => {
      event.preventDefault();
 
@@ -219,33 +184,6 @@ function renderTasks(projectId) {
      });
 
  }
-
-/*
-function renderProjects(projectCollection) {
-     const container = document.querySelector('.projects-container');
-     container.innerHTML = "";
-     projectCollection.printAll().forEach((newProject) => {
-
-          if(newProject.id === "default"){
-
-               const defaultProj = createDefaultProject(
-                    newProject.id,
-                    newProject.name
-                );
-               addProjectToNav(defaultProj);
-
-               newProject.tasks.forEach(() => {
-                    renderTasks(newProject.id);
-               });
-
-          }else{
-               const projectTab =  createProjectTab(newProject.id,newProject.name);
-               addProjectToNav(projectTab);
-          }
-
-     });
- }
-*/
 
 function renderProjects(projectCollection) {
      const container = document.querySelector('.projects-container');
