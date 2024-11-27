@@ -60,3 +60,38 @@ export function renderDeleteTaskBtn(node) {
   return iconSvg;
 
 }
+
+export function renderAddIcon(node) {
+  const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+
+  iconSvg.classList.add('add-icon');
+  iconSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  iconSvg.setAttribute("x", "0px");
+  iconSvg.setAttribute("y", "0px");
+  iconSvg.setAttribute("width", "24");
+  iconSvg.setAttribute("height", "24");
+  iconSvg.setAttribute("viewBox", "0 0 24 24");
+
+
+  const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path1.setAttribute(
+    "d",
+    "M19,10c-0.278,0-2.447,0-5,0c0-2.553,0-4.722,0-5c0-1.105-0.895-2-2-2s-2,0.895-2,2	c0,0.278,0,2.447,0,5c-2.553,0-4.722,0-5,0c-1.105,0-2,0.895-2,2c0,1.105,0.895,2,2,2c0.2,0,13.8,0,14,0c1.105,0,2-0.895,2-2	C21,10.895,20.105,10,19,10z"
+  );
+  path1.setAttribute("opacity", ".35");
+  iconSvg.appendChild(path1);
+
+
+  const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path2.setAttribute(
+    "d",
+    "M12,21c1.105,0,2-0.895,2-2c0-0.278,0-2.447,0-5h-4c0,2.553,0,4.722,0,5C10,20.105,10.895,21,12,21z"
+  );
+  iconSvg.appendChild(path2);
+
+  node.appendChild(iconSvg);
+
+  return iconSvg;
+}
+
