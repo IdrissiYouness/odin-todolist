@@ -35,6 +35,15 @@ document.body.appendChild(pageContainer);
 
 document.addEventListener('DOMContentLoaded', () => {
      attachEventListeners();
+
+    const defaultProjectId = "default";
+    const defaultTab = document.querySelector(`.tab[data-project-id="${defaultProjectId}"]`);
+
+    if (defaultTab) {
+        defaultTab.classList.add('active');
+        renderTasks(defaultProjectId);
+    }
+
  });
 
 
@@ -49,51 +58,125 @@ function initializeStorage() {
 }
 
 
-
- confirmProjectButton.addEventListener('click',()=>{
+/*
+ confirmProjectButton.addEventListener('click',()=>
+     {
      const projectName = projectNameInput.value;
+
      const newId = Date.now().toString();
 
      const newProj = project(newId,projectName);
+
      myProjects.addProject(newProj);
+
      const newProjectTab = createProjectTab(newId,projectName);
+
      addProjectToNav(newProjectTab);
-     newProjectTab.addEventListener
+
+     newProjectTab.addEventListener('click',(event)=>{
+          const previouslyActive = document.querySelector('.active');
+          if (previouslyActive) {
+               previouslyActive.classList.remove('active');
+          }
+          const clickedTab = event.currentTarget;
+
+          clickedTab.classList.add('active');
+
+          const newActiveProjectId = clickedTab.dataset.projectId;
+
+          renderTasks(newActiveProjectId);
+     });
+
      exportDataToStorage(myProjects);
+
      return true;
 });
+*/
+
+confirmProjectButton.addEventListener('click', (event) => {
+     event.preventDefault();
+
+     const projectName = projectNameInput.value.trim();
+
+     if (!projectName){
+       alert('Please Enter a valid Project name!');
+       return;
+     }
+
+     const newId = Date.now().toString();
+     const newProj = project(newId, projectName);
+
+     myProjects.addProject(newProj);
+     exportDataToStorage(myProjects);
+
+
+     const newProjectTab = createProjectTab(newId, projectName);
+     addProjectToNav(newProjectTab);
+
+
+     setActiveTab(newProjectTab);
+
+
+     newProjectTab.addEventListener('click', (event) => {
+         const clickedTab = event.currentTarget;
+         setActiveTab(clickedTab);
+         renderTasks(clickedTab.dataset.projectId);
+     });
+
+
+     projectNameInput.value = '';
+     projectModal.style.display = 'none';
+ });
 
 confirmTaskButton.addEventListener('click',()=>{
 
-     const newTaskId = Date.now().toString();
-
      const activeProjectId = getActiveProjectId();
+     const activeProjectIndex = myProjects.findProjectIndex(activeProjectId);
 
-     const activeProject = myProjects.findProjectIndex(activeProjectId);
+     if (activeProjectIndex === -1) {
+          alert('this project does no exist we cannot renders its tasks!');
+          return;
+     }
 
-     const newTask = task
-     (
+     const newTaskId = Date.now().toString();
+     const taskTitle = titleTaskInput.value.trim();
+     const taskDesc =  descInput.value.trim();
+     const priority = priorityListSelect.value.trim();
+     const dueDate = dueDateInput.value.trim()
+
+     if(!taskTitle || !taskDesc || !dueDate){
+          alert('Empty Record please fill all fields!');
+          return;
+     }
+
+     const newTask = task(
           newTaskId,
-          titleTaskInput.value,
-          descInput.value,
-          priorityListSelect.value,
-          dueDateInput.value
+          taskTitle,
+          taskDesc,
+          priority,
+          dueDate
      );
 
-     myProjects.getProject(activeProject).addATask(newTask);
+     const activeProject = myProjects.getProject(activeProjectIndex);
+     activeProject.addATask(newTask);
 
      const taskItem = createTaskItem(
           newTaskId,
-          titleTaskInput.value,
-          descInput.value,
-          priorityListSelect.value,
-          dueDateInput.value
+          taskTitle,
+          taskDesc,
+          priority,
+          dueDate
      );
-
      addTaskToDom(taskItem);
 
      exportDataToStorage(myProjects);
 
+     titleTaskInput.value = '';
+     descInput.value = '';
+     priorityListSelect.value = 'Medium';
+     dueDateInput.value = '';
+
+     taskModal.style.display = 'none';
 })
 
 
@@ -114,12 +197,6 @@ tabs.forEach(tab => {
     console.log('rendering the tasks of',activeProjectId);
   });
 });
-
-
-
-
-
-
 
 
 function renderTasks(projectId) {
@@ -143,7 +220,7 @@ function renderTasks(projectId) {
 
  }
 
-
+/*
 function renderProjects(projectCollection) {
      const container = document.querySelector('.projects-container');
      container.innerHTML = "";
@@ -167,6 +244,40 @@ function renderProjects(projectCollection) {
           }
 
      });
+ }
+*/
+
+function renderProjects(projectCollection) {
+     const container = document.querySelector('.projects-container');
+     container.innerHTML = "";
+
+     projectCollection.printAll().forEach((project) => {
+         const projectTab =
+             project.id === "default"
+                 ? createDefaultProject(project.id, project.name)
+                 : createProjectTab(project.id, project.name);
+
+         addProjectToNav(projectTab);
+
+         projectTab.addEventListener('click', (event) => {
+             const clickedTab = event.currentTarget;
+             setActiveTab(clickedTab);
+             renderTasks(clickedTab.dataset.projectId);
+         });
+
+         if (project.id === "default") {
+             setActiveTab(projectTab);
+             renderTasks(project.id);
+         }
+     });
+ }
+
+ function setActiveTab(tab) {
+     const previouslyActive = document.querySelector('.tab.active');
+     if (previouslyActive) {
+         previouslyActive.classList.remove('active');
+     }
+     tab.classList.add('active');
  }
 
 

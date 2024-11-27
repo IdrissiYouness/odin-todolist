@@ -1,6 +1,6 @@
 import { createDiv, createHeading } from "./dom-elements";
-import project from "../modules/project";
-import { renderTasks } from "./main-content";
+import { renderDeleteTaskBtn } from "../utils/icons-rendering";
+
 export default function createNav(){
     const nav = document.createElement('nav');
 
@@ -26,7 +26,7 @@ function createProjectListContainer(){
 
 function createAddNewProjectBtn(){
   const addNewProjectBtn = createDiv("btn");
-  addNewProjectBtn.classList.add('open-modal-btn');
+  addNewProjectBtn.classList.add('open-modal-btn','add-project-btn');
   addNewProjectBtn.setAttribute('data-modal-id','add-project-modal');
   addNewProjectBtn.textContent = "Create New Project";
   return addNewProjectBtn;
@@ -34,19 +34,26 @@ function createAddNewProjectBtn(){
 
 
 export function createDefaultProject(newProjectId, newProjectName){
+
     const defaultProject = createDiv('tab');
     defaultProject.dataset.projectId = newProjectId;
-    defaultProject.classList.add('project','active');
+    defaultProject.classList.add('project');
     defaultProject.textContent = newProjectName;
+
     return defaultProject;
 }
 
 
 export function createProjectTab(newProjectId,newProjectName) {
+
     const projectTab = createDiv('tab');
+    const projectNameHolder = createDiv('project-name');
     projectTab.classList.add('project');
     projectTab.dataset.projectId = newProjectId;
-    projectTab.textContent = newProjectName;
+    projectNameHolder.textContent = newProjectName;
+    projectTab.appendChild(projectNameHolder);
+    renderDeleteTaskBtn(projectTab);
+
     return projectTab;
 }
 

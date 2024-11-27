@@ -1,4 +1,5 @@
 
+import { renderAddIcon } from "../utils/icons-rendering";
 import { createDiv, createPara, createCheckBox } from "./dom-elements";
 import { createMainGreeting } from "./greeting";
 import { createActionsDom } from "./task-actions";
@@ -31,10 +32,13 @@ function createTaskListContainer(){
 
 function createAddNewTaskBtn(){
     const addNewTaskBtn = createDiv("btn");
+    const btnText = createDiv("btn-txt");
     addNewTaskBtn.classList.add('add-task-btn');
     addNewTaskBtn.classList.add('open-modal-btn');
     addNewTaskBtn.setAttribute('data-modal-id','add-task-modal');
-    addNewTaskBtn.textContent = "Create new task";
+    btnText.textContent = "Create new task";
+    //renderAddIcon(addNewTaskBtn);
+    addNewTaskBtn.appendChild(btnText);
     return addNewTaskBtn;
 }
 
@@ -52,7 +56,7 @@ export function createTaskItem(newTaskId,newTitle,newDescription,newPriority,new
     taskTitle.textContent = newTitle;
 
     const priorityTag = document.createElement('span');
-    priorityTag.classList.add('priority-tag');
+    priorityTag.classList.add('priority-tag',`${newPriority}`);
     priorityTag.textContent = newPriority;
 
     const taskHolder = createDiv("task-holder");
@@ -61,13 +65,11 @@ export function createTaskItem(newTaskId,newTitle,newDescription,newPriority,new
 
     const dueDateHolder = createPara("due-date");
     dueDateHolder.textContent = newDueDate;
-
-
+    if(isOverDue(newDueDate)) dueDateHolder.classList.add('over-due');
 
     const {
         actionsDiv:actions
     } = createActionsDom();
-
 
     const descriptionHolder = createDiv("desc-container");
     const taskDescription = createPara("task-desc");
@@ -94,4 +96,9 @@ export function addTaskToDom(task){
 export function  removeTaskFromDom(task){
     const div = document.querySelector('.task-list-container');
     div.removeChild(task);
+}
+
+export function isOverDue(dueDate){
+    const today = new Date();
+    return new Date(dueDate) < today;
 }
