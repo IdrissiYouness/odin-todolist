@@ -1,5 +1,4 @@
 
-import { renderAddIcon } from "../utils/icons-rendering";
 import { createDiv, createPara, createCheckBox } from "./dom-elements";
 import { createMainGreeting } from "./greeting";
 import { createActionsDom } from "./task-actions";

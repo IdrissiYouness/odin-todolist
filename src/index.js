@@ -1,5 +1,5 @@
 import './styles/style.css';
-import createNav from './ui/nav';
+import createNav, { removeProjectFromNav } from './ui/nav';
 import createMainContent ,{createTaskItem,addTaskToDom} from './ui/main-content.js';
 import { createDiv } from './ui/dom-elements.js';
 import { getActiveProjectId,createProjectTab,addProjectToNav,createDefaultProject } from "./ui/nav";
@@ -217,6 +217,19 @@ function renderProjects(projectCollection) {
      }
      tab.classList.add('active');
  }
+
+
+    document.querySelectorAll('.delete-project').forEach(btn=>{
+
+        btn.addEventListener('click',(event)=>{
+            event.stopPropagation();
+            const projectDom = event.target.parentNode.parentNode;
+            removeProjectFromNav(projectDom);
+        });
+
+
+    });
+
 
 
 

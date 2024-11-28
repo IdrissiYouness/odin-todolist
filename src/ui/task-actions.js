@@ -1,10 +1,11 @@
 import { createDiv } from "./dom-elements";
-import { renderDeleteTaskBtn } from "../utils/icons-rendering";
+import { renderDeleteBtn } from "../utils/icons-rendering";
 
 
 const createActionsDom = () =>{
     const actionsDiv = createDiv("actions");
-    renderDeleteTaskBtn(actionsDiv);
+    const deleteTaskIcon = renderDeleteBtn(actionsDiv);
+    deleteTaskIcon.classList.add('delete-task');
 
     return{
         actionsDiv

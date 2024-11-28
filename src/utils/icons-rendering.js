@@ -25,12 +25,12 @@ export function renderCloseModalBtn(node){
   return iconSvg;
 }
 
-export function renderDeleteTaskBtn(node) {
+export function renderDeleteBtn(node) {
 
   const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
 
-  iconSvg.classList.add('delete-task-btn');
+  iconSvg.classList.add('delete-btn');
   iconSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   iconSvg.setAttribute("x", "0px");
   iconSvg.setAttribute("y", "0px");

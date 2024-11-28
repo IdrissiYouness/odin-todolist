@@ -1,5 +1,5 @@
 import { createDiv, createHeading } from "./dom-elements";
-import { renderDeleteTaskBtn } from "../utils/icons-rendering";
+import { renderDeleteBtn } from "../utils/icons-rendering";
 
 export default function createNav(){
     const nav = document.createElement('nav');
@@ -52,7 +52,8 @@ export function createProjectTab(newProjectId,newProjectName) {
     projectTab.dataset.projectId = newProjectId;
     projectNameHolder.textContent = newProjectName;
     projectTab.appendChild(projectNameHolder);
-    renderDeleteTaskBtn(projectTab);
+    const deleteProjectBtn = renderDeleteBtn(projectTab);
+    deleteProjectBtn.classList.add('delete-project');
 
     return projectTab;
 }
