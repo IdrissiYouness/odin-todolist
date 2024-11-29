@@ -77,8 +77,7 @@ confirmProjectButton.addEventListener('click', (event) => {
 
      const newProjectTab = createProjectTab(newId, projectName);
      addProjectToNav(newProjectTab);
-
-
+     attachDeleteProjectEvent(newProjectTab,newId);
      setActiveTab(newProjectTab);
 
 
@@ -197,6 +196,8 @@ function renderProjects(projectCollection) {
 
          addProjectToNav(projectTab);
 
+         attachDeleteProjectEvent(projectTab,project.id);
+
          projectTab.addEventListener('click', (event) => {
              const clickedTab = event.currentTarget;
              setActiveTab(clickedTab);
@@ -218,23 +219,16 @@ function renderProjects(projectCollection) {
      tab.classList.add('active');
  }
 
+function attachDeleteProjectEvent(projectDom,projectId){
+    const deleteIcon = projectDom.lastChild;
+    deleteIcon.addEventListener('click',(event)=>{
+        event.stopPropagation();
+        console.log('NOW I AM DELETING THIS CLICKED PROJECT');
 
-    document.querySelectorAll('.delete-project').forEach(btn=>{
+        const projectIndex = myProjects.findProjectIndex(projectId);
+        myProjects.removeProject(projectIndex);
 
-        btn.addEventListener('click',(event)=>{
-            event.stopPropagation();
-            const projectDom = event.target.parentNode.parentNode;
-            removeProjectFromNav(projectDom);
-        });
-
-
+        exportDataToStorage(myProjects);
+        removeProjectFromNav(projectDom);
     });
-
-
-
-
-
-
-
-
-
+}
