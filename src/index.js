@@ -1,6 +1,6 @@
 import './styles/style.css';
 import createNav, { removeProjectFromNav } from './ui/nav';
-import createMainContent ,{createTaskItem,addTaskToDom} from './ui/main-content.js';
+import createMainContent ,{createTaskItem,addTaskToDom, removeTaskFromDom} from './ui/main-content.js';
 import { createDiv } from './ui/dom-elements.js';
 import { getActiveProjectId,createProjectTab,addProjectToNav,createDefaultProject } from "./ui/nav";
 import { createProjectModal,createTaskModal} from "./ui/modals";
@@ -132,7 +132,7 @@ confirmTaskButton.addEventListener('click',()=>{
           dueDate
      );
      addTaskToDom(taskItem);
-
+     attachDeleteTaskEvent(taskItem,newTaskId,activeProjectIndex)
      exportDataToStorage(myProjects);
 
      titleTaskInput.value = '';
@@ -180,6 +180,7 @@ function renderTasks(projectId) {
              task.dueDate
          );
          addTaskToDom(newTaskItem);
+         attachDeleteTaskEvent(newTaskItem,task.id,projectIndex);
      });
 
  }
@@ -230,5 +231,19 @@ function attachDeleteProjectEvent(projectDom,projectId){
 
         exportDataToStorage(myProjects);
         removeProjectFromNav(projectDom);
+    });
+}
+
+function attachDeleteTaskEvent(taskDom,taskId,projectIndex){
+    const deleteIcon = taskDom.firstChild.lastChild.querySelector('.delete-task');
+    deleteIcon.addEventListener('click',(event)=>{
+        event.stopPropagation();
+        console.log('NOW I AM DELETING THIS CLICKED TASK');
+
+        const taskIndex = myProjects.getProject(projectIndex).getTaskIndexById(taskId);
+        myProjects.getProject(projectIndex).removeATask(taskIndex);
+
+        exportDataToStorage(myProjects);
+        removeTaskFromDom(taskDom);
     });
 }
