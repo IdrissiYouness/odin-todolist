@@ -1,9 +1,8 @@
-export default function task(id, title, description, priority, dueDate){
+export default function task(id, title, description, priority, dueDate,isCompleted=false){
     const getId = ()=> id;
     const getTitle = ()=> title;
     const getDescription = ()=> description;
     const getDueDate = ()=> dueDate;
-    let isCompleted = false;
     const getStatus = () => isCompleted;
     const getPriority = () => priority;
     const setTitle = newTitle => title = newTitle;

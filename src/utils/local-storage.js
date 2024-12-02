@@ -11,8 +11,7 @@ export function importDataFromStorage(storage){
 
     if (proj.tasks !== undefined) {
       proj.tasks.forEach(myTask => {
-        const newTask = task(myTask.id, myTask.title, myTask.description,myTask.priority, myTask.dueDate)
-        if (myTask.completionStatus === 'true') newTask.setStatus('true');
+        const newTask = task(myTask.id, myTask.title, myTask.description,myTask.priority, myTask.dueDate,myTask.isCompleted);
         newProject.addATask(newTask);
       });
     }

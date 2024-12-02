@@ -41,7 +41,7 @@ export default function project(id, name){
           description: task.getDescription(),
           dueDate: task.getDueDate(),
           priority: task.getPriority(),
-          completionStatus: task.getStatus(),
+          isCompleted: task.getStatus(),
         };
       });
     };

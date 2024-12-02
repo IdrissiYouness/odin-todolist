@@ -42,14 +42,16 @@ function createAddNewTaskBtn(){
 }
 
 
-export function createTaskItem(newTaskId,newTitle,newDescription,newPriority,newDueDate){
+export function createTaskItem(newTaskId,newTitle,newDescription,newPriority,newDueDate,isCompleted){
 
     const taskGiantItem = createDiv("task-giant-item");
     taskGiantItem.dataset.taskId = newTaskId;
     const taskItemContainer = createDiv("task-item-container");
 
     const checkboxHolder = createDiv("check-box");
-    checkboxHolder.appendChild(createCheckBox("done"));
+    const checkbox = createCheckBox("done");
+    checkbox.checked = isCompleted;
+    checkboxHolder.appendChild(checkbox);
 
     const taskTitle = createPara("task-title");
     taskTitle.textContent = newTitle;

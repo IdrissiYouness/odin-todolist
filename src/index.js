@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const myProjects = initializeStorage();
 
+console.log(myProjects.printAll());
+
 renderProjects(myProjects);
 
 function initializeStorage() {
@@ -118,7 +120,8 @@ confirmTaskButton.addEventListener('click',()=>{
           taskTitle,
           taskDesc,
           priority,
-          dueDate
+          dueDate,
+          false
      );
 
      const activeProject = myProjects.getProject(activeProjectIndex);
@@ -129,17 +132,18 @@ confirmTaskButton.addEventListener('click',()=>{
           taskTitle,
           taskDesc,
           priority,
-          dueDate
+          dueDate,
+          false
      );
      addTaskToDom(taskItem);
-     attachDeleteTaskEvent(taskItem,newTaskId,activeProjectIndex)
+     attachDeleteTaskEvent(taskItem,newTaskId,activeProjectIndex);
+     attachCheckboxEvent(taskItem,newTaskId,activeProjectIndex);
      exportDataToStorage(myProjects);
 
      titleTaskInput.value = '';
      descInput.value = '';
      priorityListSelect.value = 'Medium';
      dueDateInput.value = '';
-
      taskModal.style.display = 'none';
 })
 
@@ -177,9 +181,15 @@ function renderTasks(projectId) {
              task.title,
              task.description,
              task.priority,
-             task.dueDate
+             task.dueDate,
+             task.isCompleted
          );
          addTaskToDom(newTaskItem);
+         if (task.isCompleted) {
+            const taskTitle = newTaskItem.querySelector(".task-title");
+            taskTitle.style.textDecoration = "line-through";
+        }
+         attachCheckboxEvent(newTaskItem,task.id,projectIndex);
          attachDeleteTaskEvent(newTaskItem,task.id,projectIndex);
      });
 
@@ -245,5 +255,29 @@ function attachDeleteTaskEvent(taskDom,taskId,projectIndex){
 
         exportDataToStorage(myProjects);
         removeTaskFromDom(taskDom);
+    });
+}
+
+
+function attachCheckboxEvent(taskDom,taskId,projectIndex) {
+    const checkbox = taskDom.querySelector('input[type=checkbox]');
+    const taskTitle = taskDom.querySelector('.task-title');
+
+    const task = myProjects.getProject(projectIndex).getTask(taskId);
+
+    checkbox.addEventListener('change', (event) => {
+        event.stopPropagation();
+
+        const isCompleted = checkbox.checked;
+
+        task.setStatus(isCompleted);
+
+        if (isCompleted) {
+            taskTitle.style.textDecoration = 'line-through';
+        } else {
+            taskTitle.style.textDecoration = 'none';
+        }
+
+        exportDataToStorage(myProjects);
     });
 }
